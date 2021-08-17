@@ -1,5 +1,5 @@
 package com.andremachado.domain.repository;
-import com.andremachado.domain.Person;
+import com.andremachado.domain.model.Person;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
