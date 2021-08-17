@@ -15,6 +15,12 @@ public class PersonService {
 
     @Transactional(rollbackFor = Exception.class)
     public void create(PersonCreateDTO dto){
-        Person.builder().name(dto.getName()).email(dto.getEmail()).cellPhone(dto.getCellPhone()).build();
+       personRepository.save(
+               Person.builder().
+                       name(dto.getName()).
+                       email(dto.getEmail()).
+                       cellPhone(dto.getCellPhone())
+                       .build()
+       );
     }
 }
