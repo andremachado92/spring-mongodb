@@ -8,6 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 public class PersonService {
 
@@ -37,5 +39,9 @@ public class PersonService {
     public Person findById(String personId){
         return personRepository.findById(personId).orElseThrow(()-> new
                 ObjectNotFoundException("Pessoa não encontrada na base de dados"));
+    }
+
+    public List<Person> findAll(){
+        return personRepository.findAll();
     }
 }
