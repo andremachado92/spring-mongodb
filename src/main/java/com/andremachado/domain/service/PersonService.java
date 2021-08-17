@@ -1,4 +1,5 @@
 package com.andremachado.domain.service;
+import com.andremachado.api.exception.ObjectNotFoundException;
 import com.andremachado.domain.model.Person;
 import com.andremachado.domain.repository.PersonRepository;
 import com.andremachado.dto.PersonCreateDTO;
@@ -22,5 +23,19 @@ public class PersonService {
                        cellPhone(dto.getCellPhone())
                        .build()
        );
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    public void update(String personId, PersonCreateDTO dto){
+        var currentPerson = findById(personId);
+        currentPerson.setName(dto.getName());
+        currentPerson.setEmail(dto.getEmail());
+        currentPerson.setCellPhone(dto.getCellPhone());
+        personRepository.save(currentPerson);
+    }
+
+    public Person findById(String personId){
+        return personRepository.findById(personId).orElseThrow(()-> new
+                ObjectNotFoundException("Pessoa não encontrada na base de dados"));
     }
 }
